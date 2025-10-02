@@ -17,14 +17,13 @@ def identify_parent_or_combo(gametes):
 
 
 # TODO
-def helper_id(gene1, gene2, gene3, current_gamete):
-    genes12 = []
-    genes13 = []
-    genes23 = []
+def check_current_gamete(gene1, gene2, gene3, current_gamete):
 
-    check_recomb(current_gamete, gene1, gene2)
-    check_recomb(current_gamete, gene1, gene3)
-    check_recomb(current_gamete, gene2, gene3)
+    gene_combo_12 = check_recomb(current_gamete, gene1, gene2)
+    gene_combo_13 = check_recomb(current_gamete, gene1, gene3)
+    gene_combo_23 = check_recomb(current_gamete, gene2, gene3)
+
+    return (gene_combo_12, gene_combo_13, gene_combo_23)
 
 
 
