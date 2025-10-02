@@ -1,6 +1,9 @@
 def main():
     print(process_raw_gametes("Examples/gametes_example_1.txt"))
 
+    proccessed = process_raw_gametes("Examples/gametes_example_1.txt")
+    print(gene_mapping(proccessed, 'A', 'B', 'C'))
+
 
 def process_raw_gametes(filename):
     gametes = {}
@@ -12,11 +15,37 @@ def process_raw_gametes(filename):
 
 
 # TODO
-def identify_parent_or_combo(gametes):
-    pass
+def gene_mapping(gametes, gene1, gene2, gene3):
+    sum_recom_gene12 = 0
+    sum_recom_gene13 = 0
+    sum_recom_gene23 = 0
+
+    total_gametes = 0
+    for gamete in gametes:
+        total_gametes += gametes[gamete]
 
 
-# TODO
+    for gamete in gametes:
+        result = check_current_gamete(gene1, gene2, gene3, gamete)
+        if result[0] == "recombinental":
+            sum_recom_gene12 += gametes[gamete]
+        if result[1] == "recombinental":
+            sum_recom_gene23 += gametes[gamete]
+        if result[2] == "recombinental":
+            sum_recom_gene13 += gametes[gamete]
+    
+    distance_gene12 = calc_distance(sum_recom_gene12, total_gametes)
+    distance_gene13 = calc_distance(sum_recom_gene13, total_gametes)
+    distance_gene23 = calc_distance(sum_recom_gene23, total_gametes)
+
+    return distance_gene12, distance_gene13, distance_gene23
+    
+
+def calc_distance(sum_recombs, total):
+    return (sum_recombs/total)*100
+    
+
+
 def check_current_gamete(gene1, gene2, gene3, current_gamete):
 
     gene_combo_12 = check_recomb(current_gamete, gene1, gene2)

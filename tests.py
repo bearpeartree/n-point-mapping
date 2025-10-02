@@ -1,7 +1,6 @@
 from main import check_recomb
 from main import check_current_gamete
 
-
 def test_check_parental_combo():
     test_gamete = "A+/B/C+"
     
@@ -34,3 +33,5 @@ def test_check_current_gamete_all_parental():
     tester = "vg/e/c"
 
     assert check_current_gamete('vg', 'e', 'c', tester) == ("parental", "parental", "parental")
+
+
