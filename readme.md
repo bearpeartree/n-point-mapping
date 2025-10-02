@@ -5,7 +5,7 @@
 
 # How to use
 - Clone this repo
-- Save your .txt file in this repo
+- Save your .txt file in the "inputs" directory
 - Execute the program with python3 main.py
 - Once the program asks for your filename, just enter the filename (just the name; no directories or anything else)
 
