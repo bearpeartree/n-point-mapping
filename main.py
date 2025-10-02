@@ -1,8 +1,18 @@
 def main():
-    print(process_raw_gametes("Examples/gametes_example_1.txt"))
+    gene1 = input("Enter first gene: ")
+    gene2 = input ("Enter second gene: ")
+    gene3 = input("Enter third gene: ")
 
-    proccessed = process_raw_gametes("Examples/gametes_example_1.txt")
-    print(gene_mapping(proccessed, 'A', 'B', 'C'))
+    filename = input("Enter filename: ")
+
+
+    proccessed = process_raw_gametes("inputs/" + filename)
+    dist_gene12, dist_gene13, dist_gene23 = gene_mapping(proccessed, gene1, gene2, gene3)
+
+    print_results(gene1, gene2, dist_gene12)
+    print_results(gene2, gene3, dist_gene23)
+    print_results(gene1, gene3, dist_gene13)
+
 
 
 def process_raw_gametes(filename):
@@ -14,7 +24,6 @@ def process_raw_gametes(filename):
     return gametes
 
 
-# TODO
 def gene_mapping(gametes, gene1, gene2, gene3):
     sum_recom_gene12 = 0
     sum_recom_gene13 = 0
@@ -38,12 +47,15 @@ def gene_mapping(gametes, gene1, gene2, gene3):
     distance_gene13 = calc_distance(sum_recom_gene13, total_gametes)
     distance_gene23 = calc_distance(sum_recom_gene23, total_gametes)
 
-    return distance_gene12, distance_gene13, distance_gene23
+    return distance_gene12, distance_gene23, distance_gene13
     
 
 def calc_distance(sum_recombs, total):
     return (sum_recombs/total)*100
     
+
+def print_results(gene1, gene2, distance):
+    print("Distance between Gene " + gene1 + " and " + gene2 + " : " + str(distance))
 
 
 def check_current_gamete(gene1, gene2, gene3, current_gamete):
@@ -53,7 +65,6 @@ def check_current_gamete(gene1, gene2, gene3, current_gamete):
     gene_combo_23 = check_recomb(current_gamete, gene2, gene3)
 
     return (gene_combo_12, gene_combo_13, gene_combo_23)
-
 
 
 def check_recomb(gamete, first_gene, second_gene):
